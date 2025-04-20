@@ -4,7 +4,7 @@ import {pageFactory} from "../../pages/pageFactory";
 let pages
 let page
 let context
-test.describe('Home Page Verification Test @smoke', async () => {
+test.describe('Home Page Verification Test', async () => {
     test.beforeAll(async ({browser}) => {
         context = await browser.newContext()
         page = await context.newPage()
@@ -19,7 +19,7 @@ test.describe('Home Page Verification Test @smoke', async () => {
 
     const products = ['IPO', 'Mutual Funds', 'Offers & Rewards', 'Refer & Earn', 'Subscription Plans']
     products.forEach(product => {
-        test(`Verify product navigation for ${product}`, async ()=>{
+        test(`Verify product navigation for ${product} @smoke`, async ()=>{
             await pages.homePage.verifyProductsCard()
             await pages.homePage.productsNavigation(product)
         })
@@ -27,7 +27,7 @@ test.describe('Home Page Verification Test @smoke', async () => {
 
     const rem_products = ['Futures & Options', 'ETF', 'MTF']
     rem_products.forEach(rem_product => {
-        test(`Verify product navigation for ${rem_product}`, async ()=>{
+        test(`Verify product navigation for ${rem_product} @smoke`, async ()=>{
             await pages.homePage.verifyProductsCard()
             await pages.homePage.rem_productsNavigation(rem_product)
         })
