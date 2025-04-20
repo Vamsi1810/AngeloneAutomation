@@ -13,6 +13,7 @@ export class HomePage extends commonLocatorMethodsPage {
         this.smallcaseText = 'Smallcase'
         this.vestedText = 'Vested'
         this.sensibullText = 'Sensibull'
+        this.news = 'News'
     }
     async navigateToHomePage(){
         await this.page.goto(urls.home)
@@ -81,5 +82,77 @@ export class HomePage extends commonLocatorMethodsPage {
             await this.validateNewTabUrl(serviceLink, urls.vested)
         else if(service === 'Sensibull')
             await this.validateNewTabUrl(serviceLink, urls.sensibull)
+    }
+    async verifyFeaturesCard() {
+        const card = this.getElementByText('Features')
+        await expect(card).toBeVisible()
+    }
+
+    async featureNavigation(feature) {
+        const featureItem = await this.getElementByText(feature, true)
+        await expect(featureItem).toBeVisible()
+        
+        if(feature === 'Basket Order') {
+            await featureItem.click()
+            await expect(this.page.getByRole('link', {name: feature})).toBeVisible()
+        }
+        else if(feature === 'GTT') {
+            await featureItem.click()
+            await expect(this.page.getByRole('link', {name: feature})).toBeVisible()
+        }
+        else if(feature === 'Stock SIP') {
+            await featureItem.click()
+            await expect(this.page.getByRole('link', {name: feature, exact: true})).toBeVisible()
+        }
+        else if(feature === 'Alerts') {
+            await featureItem.click()
+            await expect(this.page.getByRole('link', {name: feature})).toBeVisible()
+        }
+        else if(feature === 'TradeOne'){
+            const featureItem = this.page.getByText(feature)
+            const newTab = await this.validateNewTab(featureItem)
+            await expect(newTab.url()).toContain(urls.trade_one)
+        }
+        else if(feature === 'Smart API') {
+            const item = this.page.getByText('Smart API')
+            const newTab = await this.validateNewTab(item)
+            const smartAPI = newTab.getByRole('link', { name: 'SmartAPI logo' })
+            await expect(smartAPI).toBeVisible()
+        }
+        else if(feature === 'Stock Pledging'){
+            await featureItem.click()
+            const item = this.page.getByText('Pledged')
+            await expect(item).toBeVisible()
+        }
+        else if(feature === 'For advanced F&O analysis') {
+            const newTab = await this.validateNewTab(featureItem)
+            await expect(newTab.url()).toContain(urls.sensibull)
+        }
+    }
+
+    async validateNewsTabInHome() {
+        await expect(this.page.getByRole
+        ('heading', { name: this.news, exact: true }))
+            .toBeVisible()
+    }
+    async verifyNewsNavigation(){
+        const view_all = this.page.locator('div').filter({ hasText: /^NewsVIEW ALL$/ }).getByRole('button')
+        await view_all.click()
+        const newsTab = this.page.getByText(this.news, { exact: true })
+        await expect(newsTab).toBeVisible()
+    }
+    async verifyMarketMoverHeading() {
+        const header = this.getHeadingElement('Market Movers')
+        await expect(header).toBeVisible()
+    }
+    async verifyGainerLooserNavigation(category) {
+        await this.page.getByRole('button', { name: category }).click()
+        await this.page.getByRole('button', { name: 'VIEW ALL ' }).first().click()
+        await expect(this.getElementByText(category)).toBeVisible()
+    }
+    async verifyHighLowNavigation(category) {
+        await this.page.getByRole('button', { name: category }).click()
+        await this.page.getByRole('button', { name: 'VIEW ALL ' }).nth(1).click()
+        await expect(this.getElementByText('52W '+category)).toBeVisible()
     }
 }

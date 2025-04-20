@@ -51,4 +51,33 @@ test.describe('Home Page Verification Test', async () => {
             await pages.homePage.validateExternalServiceNavigation(service)
         })
     })
+
+    const features = ['Basket Order', 'GTT', 'Stock SIP', 'Alerts', 'TradeOne', 'Smart API', 'Stock Pledging', 'For advanced F&O analysis']
+    features.forEach(feature => {
+        test(`Verify feature navigation for ${feature}`, async () => {
+            await pages.homePage.verifyFeaturesCard()
+            await pages.homePage.featureNavigation(feature)
+        })
+    })
+
+    test('Verify news section present in home page', async () => {
+        await pages.homePage.validateNewsTabInHome()
+        await pages.homePage.verifyNewsNavigation()
+    })
+
+    const gainer_looser_movers = ['Gainers', 'Losers']
+    gainer_looser_movers.forEach(market_mover => {
+        test(`Verify market movers list by ${market_mover}`, async () => {
+            await pages.homePage.verifyMarketMoverHeading()
+            await pages.homePage.verifyGainerLooserNavigation(market_mover)
+        })
+    })
+
+    const high_low_movers = ['High', 'Low']
+    high_low_movers.forEach(market_mover => {
+        test(`Verify market movers list by ${market_mover}`, async () => {
+            await pages.homePage.verifyMarketMoverHeading()
+            await pages.homePage.verifyHighLowNavigation(market_mover)
+        })
+    })
 })

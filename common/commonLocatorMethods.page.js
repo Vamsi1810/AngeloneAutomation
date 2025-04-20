@@ -52,4 +52,11 @@ export class commonLocatorMethodsPage {
         await newTab.close()
         await this.page.bringToFront()
     }
+    async validateNewTab(element) {
+        const [newTab] = await Promise.all([
+            this.page.waitForEvent('popup'),
+            element.click(),
+        ])
+        return newTab
+    }
 }

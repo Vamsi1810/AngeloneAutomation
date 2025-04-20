@@ -12,5 +12,6 @@ export const urls = {
     trading_idea: 'https://www.angelone.in/trade/ssa',
     smallcase: 'https://smallcases.angelbroking.com',
     vested: 'https://app.vestedfinance.com/',
-    sensibull: 'https://web.sensibull.com/home'
+    sensibull: 'https://web.sensibull.com/',
+    trade_one:'https://www.angelone.in/trade/pro-trader'
 }
