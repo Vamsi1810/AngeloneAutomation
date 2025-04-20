@@ -4,7 +4,7 @@ import {pageFactory} from "../../pages/pageFactory";
 let pages
 let page
 let context
-test.describe('Home Page Verification Test', async () => {
+test.describe('Home Page Verification Test @smoke', async () => {
     test.beforeAll(async ({browser}) => {
         context = await browser.newContext()
         page = await context.newPage()
