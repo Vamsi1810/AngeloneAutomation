@@ -1,4 +1,4 @@
-name: Playwright Smoke Test Run
+name: Playwright Smoke Test
 
 on:
   pull_request:
