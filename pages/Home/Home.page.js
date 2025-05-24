@@ -21,6 +21,7 @@ export class HomePage extends commonLocatorMethodsPage {
 
     async verifyProductsCard() {
         const card =  this.getElementByText(this.productsHeading)
+        await this.findElementByScroll(card)
         await expect(card).toBeVisible()
     }
 
@@ -52,6 +53,7 @@ export class HomePage extends commonLocatorMethodsPage {
     }
     async verifyResearchRecommendation() {
         const card = this.getElementByText(this.research_recommendation)
+        await this.findElementByScroll(card)
         await expect(card).toBeVisible()
     }
     async viewTradingIdeasNavigation() {
@@ -134,9 +136,9 @@ export class HomePage extends commonLocatorMethodsPage {
     }
 
     async validateNewsTabInHome() {
-        await expect(this.page.getByRole
-        ('heading', { name: this.news, exact: true }))
-            .toBeVisible()
+        const card = this.page.getByRole('heading', { name: this.news, exact: true })
+        await this.findElementByScroll(card)
+        await expect(card).toBeVisible()
     }
     async verifyNewsNavigation(){
         const view_all = this.page.locator('div').filter({ hasText: /^NewsVIEW ALL$/ }).getByRole('button')
@@ -146,6 +148,7 @@ export class HomePage extends commonLocatorMethodsPage {
     }
     async verifyMarketMoverHeading() {
         const header = this.getHeadingElement('Market Movers')
+        await this.findElementByScroll(header)
         await expect(header).toBeVisible()
     }
     async verifyGainerLooserNavigation(category) {
