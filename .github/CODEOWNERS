@@ -1,0 +1,4 @@
+# CODEOWNERS file
+
+#setting admin as codeOwner
+.github/workflows/* @Vamsi1810
