@@ -59,4 +59,14 @@ export class commonLocatorMethodsPage {
         ])
         return newTab
     }
+
+    async findElementByScroll(target){
+        for (let i = 0; i < 10; i++) {
+            if (await target.count() > 0) {
+                break;
+            }
+            await this.page.mouse.wheel(0, 1000); // Scroll down
+            await this.page.waitForTimeout(1000); // Wait for content to load
+        }
+    }
 }

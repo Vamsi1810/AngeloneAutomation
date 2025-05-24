@@ -62,6 +62,7 @@ export class HomePage extends commonLocatorMethodsPage {
     }
     async validateJoinOurCommunityCard() {
         const card_heading = this.getElementByText(this.joinCommunity)
+        await this.findElementByScroll(card_heading)
         await expect(card_heading).toBeVisible()
     }
     async validateSocialMediaLink(channel) {
@@ -70,6 +71,7 @@ export class HomePage extends commonLocatorMethodsPage {
     }
     async verifyExternalServicesCard() {
         const card = this.getElementByText(this.externalServicesHeading)
+        await this.findElementByScroll(card)
         await expect(card).toBeVisible()
     }
     async validateExternalServiceNavigation(service) {
@@ -85,6 +87,7 @@ export class HomePage extends commonLocatorMethodsPage {
     }
     async verifyFeaturesCard() {
         const card = this.getElementByText('Features')
+        await this.findElementByScroll(card)
         await expect(card).toBeVisible()
     }
 
@@ -94,19 +97,19 @@ export class HomePage extends commonLocatorMethodsPage {
         
         if(feature === 'Basket Order') {
             await featureItem.click()
-            await expect(this.page.getByRole('link', {name: feature})).toBeVisible()
+            await expect(this.page.getByRole('tab', {name: feature})).toBeVisible()
         }
         else if(feature === 'GTT') {
             await featureItem.click()
-            await expect(this.page.getByRole('link', {name: feature})).toBeVisible()
+            await expect(this.page.getByRole('tab', {name: feature})).toBeVisible()
         }
         else if(feature === 'Stock SIP') {
             await featureItem.click()
-            await expect(this.page.getByRole('link', {name: feature, exact: true})).toBeVisible()
+            await expect(this.page.getByRole('tab', {name: feature, exact: true})).toBeVisible()
         }
         else if(feature === 'Alerts') {
             await featureItem.click()
-            await expect(this.page.getByRole('link', {name: feature})).toBeVisible()
+            await expect(this.page.getByRole('tab', {name: feature})).toBeVisible()
         }
         else if(feature === 'TradeOne'){
             const featureItem = this.page.getByText(feature)
