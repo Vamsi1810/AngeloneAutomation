@@ -57,6 +57,7 @@ test.describe('Home Page Verification Test', async () => {
         test(`Verify feature navigation for ${feature}`, async () => {
             await pages.homePage.verifyFeaturesCard()
             await pages.homePage.featureNavigation(feature)
+            
         })
     })
 
