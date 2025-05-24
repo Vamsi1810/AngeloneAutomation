@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+      - name: Decode AUTH_JSON_BASE64 to auth.json
+        run: echo "$AUTH_JSON_B64" | base64 --decode > auth.json
+        env:
+            AUTH_JSON_B64: ${{ secrets.AUTH_JSON_B64 }}
       - name: Install dependencies
         run: npm ci
 
