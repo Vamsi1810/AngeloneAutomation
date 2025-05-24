@@ -25,7 +25,7 @@ test.describe('Home Page Verification Test', async () => {
         })
     })
 
-    const rem_products = ['Futures & Options', 'ETF', 'MTF']
+    const rem_products = ['Futures & Options', 'ETF', 'Pay Later (MTF)']
     rem_products.forEach(rem_product => {
         test(`Verify product navigation for ${rem_product} @smoke`, async ()=>{
             await pages.homePage.verifyProductsCard()
