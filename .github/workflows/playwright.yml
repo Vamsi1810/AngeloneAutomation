@@ -6,8 +6,12 @@ on:
 
 jobs:
   test:
+    name: Automation Test Results
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-13 ]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,9 +32,12 @@ jobs:
       - name: Run @smoke tagged Playwright tests
         run: npx playwright test --grep @smoke
 
+      - name: Generate Timestamp
+        run: echo "Timestamp=$(date +%s)" >> $GITHUB_ENV
+
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report
+          name: playwright-report-${{env.Timestamp}}
           path: playwright-report/
           retention-days: 30
