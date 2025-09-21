@@ -11,7 +11,7 @@ export const urls = {
     subscription_plans: 'https://www.angelone.in/subscription-plan/?campaign=homepagecard',
     trading_idea: 'https://www.angelone.in/trade/ssa',
     smallcase: 'https://smallcases.angelbroking.com',
-    vested: 'https://app.vestedfinance.com/',
+    vested: 'https://www.angelone.in/us-stocks-vested',
     sensibull: 'https://web.sensibull.com/',
     trade_one:'https://www.angelone.in/trade/pro-trader'
 }

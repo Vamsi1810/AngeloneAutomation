@@ -101,7 +101,7 @@ export class HomePage extends commonLocatorMethodsPage {
             await featureItem.click()
             await expect(this.page.getByRole('tab', {name: feature})).toBeVisible()
         }
-        else if(feature === 'GTT') {
+        else if(feature === 'Trading Insights') {
             await featureItem.click()
             await expect(this.page.getByRole('tab', {name: feature})).toBeVisible()
         }
@@ -152,12 +152,12 @@ export class HomePage extends commonLocatorMethodsPage {
         await expect(header).toBeVisible()
     }
     async verifyGainerLooserNavigation(category) {
-        await this.page.getByRole('button', { name: category }).click()
+        await this.page.getByRole('tab', { name: category }).click()
         await this.page.getByRole('button', { name: 'VIEW ALL ' }).first().click()
         await expect(this.getElementByText(category)).toBeVisible()
     }
     async verifyHighLowNavigation(category) {
-        await this.page.getByRole('button', { name: category }).click()
+        await this.page.getByRole('tab', { name: category }).click()
         await this.page.getByRole('button', { name: 'VIEW ALL ' }).nth(1).click()
         await expect(this.getElementByText('52W '+category)).toBeVisible()
     }
