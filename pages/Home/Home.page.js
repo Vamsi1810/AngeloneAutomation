@@ -103,7 +103,7 @@ export class HomePage extends commonLocatorMethodsPage {
         }
         else if(feature === 'Trading Insights') {
             await featureItem.click()
-            await expect(this.page.getByRole('tab', {name: feature})).toBeVisible()
+            await expect(this.page.getByRole('button', {name: feature})).toBeVisible()
         }
         else if(feature === 'Stock SIP') {
             await featureItem.click()
