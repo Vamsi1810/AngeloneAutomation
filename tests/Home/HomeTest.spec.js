@@ -25,7 +25,7 @@ test.describe('Home Page Verification Test', async () => {
         })
     })
 
-    const rem_products = ['Futures & Options', 'ETF', 'Pay Later (MTF)']
+    const rem_products = ['F&O', 'ETF', 'Pay Later (MTF)']
     rem_products.forEach(rem_product => {
         test(`Verify product navigation for ${rem_product} @smoke`, async ()=>{
             await pages.homePage.verifyProductsCard()
@@ -53,7 +53,7 @@ test.describe('Home Page Verification Test', async () => {
         })
     })
 
-    const features = ['Basket Order', 'GTT', 'Stock SIP', 'Alerts', 'TradeOne', 'Smart API', 'Stock Pledging', 'For advanced F&O analysis']
+    const features = ['Basket Order', 'Trading Insights', 'Stock SIP', 'Alerts', 'TradeOne', 'Smart API', 'Stock Pledging', 'For advanced F&O analysis']
     features.forEach(feature => {
         test(`Verify feature navigation for ${feature}`, async () => {
             await pages.homePage.verifyFeaturesCard()
