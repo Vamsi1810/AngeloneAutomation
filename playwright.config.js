@@ -13,6 +13,10 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
+
+const junitDir  = process.env.JUNIT_DIR || 'test-results/junit'
+const junitFile = path.join(junitDir, 'results.xml')
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -25,9 +29,9 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-      ['list'],
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['junit', { outputFile: 'test-results/junit/results.xml' }]
+    ['list'],
+    ['html',  { outputFolder: 'playwright-report', open: 'never' }],
+    ['junit', { outputFile: junitFile }]
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
