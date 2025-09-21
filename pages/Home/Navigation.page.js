@@ -7,7 +7,7 @@ export class NavigationPage extends commonLocatorMethodsPage {
         this.icons = 'span.icon-nav-'
     }
     async verifyAngelOneLogoVisible(){
-        const logo = await this.page.getByAltText('AngelOne Logo')
+        const logo = await this.page.getByRole('img', { name: 'Angel One' })
         await expect(logo).toBeVisible()
     }
     async verifyIndicesVisibleOnHeader(indexName, match) {
