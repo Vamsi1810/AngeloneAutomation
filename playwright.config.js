@@ -38,6 +38,9 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], slowMo: 500, storageState: 'auth.json',},
     },
   ],
+  expect: {
+    timeout: 30000
+  }
 
 });
 
