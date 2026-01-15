@@ -57,16 +57,29 @@ export class commonLocatorMethodsPage {
             this.page.waitForEvent('popup'),
             element.click(),
         ])
+        // Don't close the new tab here, let the caller handle it
         return newTab
     }
 
     async findElementByScroll(target){
         for (let i = 0; i < 10; i++) {
-            if (await target.count() > 0) {
+            try {
+                const count = await target.count()
+                if (count > 0) {
+                    // Check if element is visible in viewport
+                    const isVisible = await target.first().isVisible().catch(() => false)
+                    if (isVisible) {
+                        break
+                    }
+                }
+                await this.page.mouse.wheel(0, 1000); // Scroll down
+                // Wait for DOM to stabilize after scrolling
+                await this.page.waitForLoadState('domcontentloaded');
+            } catch (error) {
+                // If page is closed or context is invalid, break out of loop
+                console.warn(`Error in findElementByScroll: ${error.message}`);
                 break;
             }
-            await this.page.mouse.wheel(0, 1000); // Scroll down
-            await this.page.waitForTimeout(1000); // Wait for content to load
         }
     }
 }

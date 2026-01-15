@@ -2,11 +2,12 @@ import {test} from '@playwright/test'
 import {urls} from '../../utils/config'
 import {pageFactory} from "../../pages/pageFactory";
 
-let pages
-let page
-let context
 test.describe('Navigation bar Verification Test', async () => {
-    test.beforeAll(async ({browser}) => {
+    let pages
+    let page
+    let context
+    
+    test.beforeEach(async ({browser}) => {
         context = await browser.newContext()
         page = await context.newPage()
         const pageFact = new pageFactory(page)
@@ -14,9 +15,13 @@ test.describe('Navigation bar Verification Test', async () => {
             homePage: await pageFact.HomePage(page),
             navigationPage: await pageFact.NavigationPage(page),
         }
-    })
-    test.beforeEach(async () => {
         await pages.homePage.navigateToHomePage()
+    })
+    
+    test.afterEach(async () => {
+        if (context) {
+            await context.close()
+        }
     })
     test('Verify Angelone logo on header', async () => {
         await pages.navigationPage.verifyAngelOneLogoVisible()

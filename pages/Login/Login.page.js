@@ -55,6 +55,7 @@ export class LoginPage extends commonLocatorMethodsPage {
     }
     async clickResendOTP(){
         await this.page.getByText(this.resendOTP).click()
+        // Wait for resend button to be re-enabled (30 second cooldown)
         await this.page.waitForTimeout(30000)
         await this.page.getByText(this.resendOTP).click()
         await expect(this.getElementByText(this.resendOTP)).toBeVisible()

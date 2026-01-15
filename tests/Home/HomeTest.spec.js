@@ -1,20 +1,25 @@
 import {test} from '@playwright/test'
 import {pageFactory} from "../../pages/pageFactory";
 
-let pages
-let page
-let context
 test.describe('Home Page Verification Test', async () => {
-    test.beforeAll(async ({browser}) => {
+    let pages
+    let page
+    let context
+    
+    test.beforeEach(async ({browser}) => {
         context = await browser.newContext()
         page = await context.newPage()
         const pageFact = new pageFactory(page)
         pages = {
             homePage: await pageFact.HomePage(page)
         }
-    })
-    test.beforeEach(async () => {
         await pages.homePage.navigateToHomePage()
+    })
+    
+    test.afterEach(async () => {
+        if (context) {
+            await context.close()
+        }
     })
 
     const products = ['IPO', 'Mutual Funds', 'Offers & Rewards', 'Refer & Earn', 'Subscription Plans']

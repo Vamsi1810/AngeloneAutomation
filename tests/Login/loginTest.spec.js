@@ -2,16 +2,23 @@ import {test} from '@playwright/test'
 import {urls} from '../../utils/config'
 import {pageFactory} from "../../pages/pageFactory";
 
-let pages
-let page
-let context
 test.describe('Login Verification Test', async () => {
-    test.beforeAll(async ({browser}) => {
+    let pages
+    let page
+    let context
+    
+    test.beforeEach(async ({browser}) => {
        context = await browser.newContext()
         page = await context.newPage()
         const pageFact = new pageFactory(page)
         pages = {
            loginPage: await pageFact.LoginPage(page)
+        }
+    })
+    
+    test.afterEach(async () => {
+        if (context) {
+            await context.close()
         }
     })
     test('Navigate and confirm slider content', async () => {

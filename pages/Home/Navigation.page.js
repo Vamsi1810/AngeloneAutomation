@@ -14,7 +14,7 @@ export class NavigationPage extends commonLocatorMethodsPage {
         const element = this.getElementByText(indexName, true).first()
         await expect(element).toBeVisible()
     }
-    async verifyIconsOnHeader(iconName) {
+    async verifyIconsOnHeader(iconName, exact) {
         const icon = await this.page.locator(this.icons+iconName)
         await expect(icon).toBeVisible()
     }
